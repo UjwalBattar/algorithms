@@ -7,7 +7,7 @@ def install_order2(arr)
 
     vertices[dependent] = Vertex.new(dependent) unless vertices[dependent]
     vertices[dependent] = Vertex.new(dependency) if dependency && !vertices[dependency]
-    Edge.new(vertices[dependency], vertices[dependent]) fi dependency
+    Edge.new(vertices[dependency], vertices[dependent]) if dependency
   end
 
   topological_sort(vertices.values).map {|v| v.value }
