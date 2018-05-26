@@ -19,6 +19,20 @@ def unique_char_string(string)
   true
 end
 
-# 1.2 Write code to reverse a C-Style String
-# (C-String means that “abcd” is represented as five characters,
-# including the null character )
+# 1.2 Check Permutation: Given two strings, write a method to decide
+# if one is a permutation of the other.
+
+def check_permutation(str1, str2)
+  return false if str1.length != str2.length
+  return true if str1 == str2
+  strHash = Hash.new(0)
+  i = 0
+
+  while i < str1.length
+    strHash[str1[i]] += 1
+    strHash[str2[i]] += 1
+    i += 1
+  end
+
+  strHash.values.all? {|el| (el % 2) == 0}
+end
