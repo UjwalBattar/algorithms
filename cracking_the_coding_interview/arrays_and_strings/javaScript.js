@@ -43,3 +43,33 @@ function checkPermutation(str1, str2) {
   });
   return true;
 }
+
+// 1.3 URLify: Write a method to replace all spaces in a string with
+// '%20' You may assume that the string has sufficient space at the end
+// to hold the additional characters, and that you are given the "true"
+// length of the string.
+// (Note: If implementing in Java, please use a character array so that
+//  you can perform this operation in place.)
+
+// function URLify(string, len) {
+//   let i;
+//   let j;
+//   let strtIdx;
+//   let endIdx;
+//
+//   while (i < string.length) {
+//     if (string[i] === " ") {
+//       strtIdx = i;
+//       j = i;
+//       while (j < string.length && j === " ") {
+//         j++;
+//       }
+//       endIdx = j;
+//     }
+//     string
+//   }
+// }
+
+function URLify(string, len) {
+  return string.trim().replace(/\s/g, "%20");
+}
