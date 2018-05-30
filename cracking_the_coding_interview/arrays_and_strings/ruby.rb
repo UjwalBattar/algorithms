@@ -45,5 +45,23 @@ end
 #  you can perform this operation in place.)
 
 def URLify(string, len)
-  string.split(" ").join("%20")
+  string.strip!.gsub!(/\s\s+/, "%20")
+end
+
+def isPalindromePermutation(string)
+  char_set = {}
+  count = 0
+  i = 0
+  while i < string.length
+    if char_set[string[i]]
+      char_set[string[i]] -= 1
+    elsif string[i] != " "
+      char_set[string[i]] = 1
+    end
+    i += 1
+  end
+  char_set.values.each do |el|
+    count += 1 if el >= 1
+  end
+  count <= 1
 end

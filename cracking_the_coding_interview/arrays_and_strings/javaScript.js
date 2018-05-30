@@ -51,25 +51,27 @@ function checkPermutation(str1, str2) {
 // (Note: If implementing in Java, please use a character array so that
 //  you can perform this operation in place.)
 
-// function URLify(string, len) {
-//   let i;
-//   let j;
-//   let strtIdx;
-//   let endIdx;
-//
-//   while (i < string.length) {
-//     if (string[i] === " ") {
-//       strtIdx = i;
-//       j = i;
-//       while (j < string.length && j === " ") {
-//         j++;
-//       }
-//       endIdx = j;
-//     }
-//     string
-//   }
-// }
-
 function URLify(string, len) {
-  return string.trim().replace(/\s/g, "%20");
+  return string.trim().replace(/\s\s+/g, "%20");
+}
+
+function isPalindromePermutation(string) {
+  let charSet = {};
+  let count = 0;
+  string = string.toLowerCase();
+  let i = 0;
+  while (i < string.length) {
+    if (charSet[string[i]]) {
+      charSet[string[i]] -= 1;
+    } else if (string[i] !== " ") {
+      charSet[string[i]] = 1;
+    }
+    i++;
+  }
+
+  Object.values(charSet).forEach(el => {
+    if (el >= 1) count++;
+  });
+  if (count > 1) return false;
+  return true;
 }
