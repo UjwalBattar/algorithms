@@ -1,3 +1,16 @@
+# longest unique substring
+
+# def test()
+#   puts maxLenSubString("abcd") # 4
+#   puts maxLenSubString("abcda") # 4
+#   puts maxLenSubString("aaaa") # 1
+#   puts maxLenSubString("abcfajga") # 6
+#   puts maxLenSubString("daad") # 2
+#
+# end
+#
+# test()
+
 def maxLenSubString(sentence)
   longest =  0
   char_hash = {}
@@ -21,14 +34,3 @@ def maxLenSubString(sentence)
 
   longest
 end
-
-def test()
-  puts maxLenSubString("abcd") # 4
-  puts maxLenSubString("abcda") # 4
-  puts maxLenSubString("aaaa") # 1
-  puts maxLenSubString("abcfajga") # 6
-  puts maxLenSubString("daad") # 2
-
-end
-
-test()
