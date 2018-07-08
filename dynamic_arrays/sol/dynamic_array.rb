@@ -1,7 +1,5 @@
 require_relative "static_array"
 
-# 7/7/18
-
 class DynamicArray
   attr_reader :length
 
@@ -27,16 +25,18 @@ class DynamicArray
   def pop
     raise "index out of bounds" if @length == 0
     last_idx = @length - 1
-    val = @store[last_idx]
+    value = @store[last_idx]
     @store[last_idx] = nil
     @length -= 1
-    return val
+    return value
   end
 
   # O(1) ammortized; O(n) worst case. Variable because of the possible
   # resize.
   def push(val)
-    resize! if (@length + 1) > @capacity
+    if @length + 1 > @capacity
+      resize!
+    end
     @store[@length] = val
     @length += 1
     @store
@@ -45,8 +45,8 @@ class DynamicArray
   # O(n): has to shift over all the elements.
   def shift
     raise "index out of bounds" if @length == 0
-    val = @store[0]
     i = 0
+    val = @store[0]
     while i < @length
       @store[i] = @store[i + 1]
       i += 1
@@ -58,11 +58,13 @@ class DynamicArray
 
   # O(n): has to shift over all the elements.
   def unshift(val)
-    resize! if (@length + 1) > @capacity
+    if @length + 1 > @capacity
+      resize!
+    end
     i = @length - 1
     while i >= 0
       @store[i + 1] = @store[i]
-      i -= 1
+      i -=1
     end
     @store[0] = val
     @length += 1
@@ -75,6 +77,7 @@ class DynamicArray
 
   def check_index(index)
     index >= 0 && index < @length
+    # index < @length
   end
 
   # O(n): has to copy over all the elements to the new store.

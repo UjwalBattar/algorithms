@@ -1,47 +1,47 @@
 # Implement a queue with #enqueue and #dequeue, as well as a #max API,
 # a method which returns the maximum element still in the queue. This
 # is trivial to do by spending O(n) time upon dequeuing.
-# Can you do it in O(1) amortized? Maybe use an auxiliary
-# storage structure?
+# Can you do it in O(1) amortized? Maybe use an auxiliary storage structure?
 
 # Use your RingBuffer to achieve optimal shifts! Write any additional
 # methods you need.
+
 
 require_relative 'ring_buffer'
 
 class QueueWithMax
   attr_accessor :store
+  attr_reader :length
 
   def initialize
     @store = RingBuffer.new
-    @max = []
+
+    @length = 0
   end
 
   def enqueue(val)
-    @store.push(val)
-    enqueue_max(val)
-  end
 
-  def enqueue_max(val)
-    # puts @maxs
-    while @max[0] && @max[@max.length - 1] < val
-      @max.pop
-    end
-    @max.push(val)
+    @store.push(val)
+    @length += 1
   end
 
   def dequeue
-    val = @store.shift
-    @max.shift if @max[0] == val
-    val
+    raise "index out of bounds" if @length == 0
+    @length -= 1
+    @store.shift
   end
 
   def max
-    @max[0]
+    greatest = nil
+    (0...@length).each do |idx|
+      if greatest == nil || @store[idx] > greatest
+        greatest = @store[idx]
+      end
+    end
+    greatest
   end
 
-  def length
-    @store.length
-  end
+
+
 
 end
