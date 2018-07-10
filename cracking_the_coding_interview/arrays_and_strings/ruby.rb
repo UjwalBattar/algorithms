@@ -81,22 +81,23 @@ def is_permutation_palindrome?(s)
   char_hash = {}
   count = 0
   i = 0
-  while i < s.length
-    if s[i] == " "
+  (0...s.length).each do |i|
+    c = s[i].ord
+    if c == 32
       next
     end
-    c = s[i].downcase.ord
-    if char_hash[c] == nil
+    if char_hash[c]
+      if char_hash[c] % 2 == 1
+        char_hash[c] += 1
+        count -= 1
+      else
+        char_hash[c] += 1
+        count += 1
+      end
+    else
       char_hash[c] = 1
       count += 1
-    elsif char_hash[c] % 2 == 1
-      char_hash[c] += 1
-      count -= 1
-    elsif char_hash[c] % 2 == 0
-      char_hash[c] += 1
-      count += 1
     end
-    i += 1
   end
-  count <= 1
+  return count <= 1
 end
