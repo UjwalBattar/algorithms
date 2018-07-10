@@ -66,7 +66,7 @@ def isPalindromePermutation(string)
   count <= 1
 end
 
-# 1.4 Palindrome Permutation: Given a string, write a function to check 
+# 1.4 Palindrome Permutation: Given a string, write a function to check
 # if it is a permutation of a palindrome. A palindrome is a word or
 # phrase that is the same forwards and backwards. A permutation is a
 # rearrangement of letters. The palindrome does not need to be limited to
@@ -76,3 +76,27 @@ end
 # Input: Tact Coa
 # Output: True (permutations: "taco cat". "atco cta". etc.)
 # Hints: #106, #121, #134, #136
+
+def is_permutation_palindrome?(s)
+  char_hash = {}
+  count = 0
+  i = 0
+  while i < s.length
+    if s[i] == " "
+      next
+    end
+    c = s[i].downcase.ord
+    if char_hash[c] == nil
+      char_hash[c] = 1
+      count += 1
+    elsif char_hash[c] % 2 == 1
+      char_hash[c] += 1
+      count -= 1
+    elsif char_hash[c] % 2 == 0
+      char_hash[c] += 1
+      count += 1
+    end
+    i += 1
+  end
+  count <= 1
+end
