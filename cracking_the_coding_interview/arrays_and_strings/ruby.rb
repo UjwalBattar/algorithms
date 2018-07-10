@@ -80,9 +80,8 @@ end
 def is_permutation_palindrome?(s)
   char_hash = {}
   count = 0
-  i = 0
   (0...s.length).each do |i|
-    c = s[i].ord
+    c = s[i].downcase.ord
     if c == 32
       next
     end
