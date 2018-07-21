@@ -28,7 +28,7 @@
 # Output:
 # YES
 # YES
-&& i != j
+
 def save_ironman(s)
   s = s.downcase.gsub(/[^a-z0-9]/, '')
   count = 0
