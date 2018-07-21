@@ -27,7 +27,7 @@ def altAvg(arr)
     if n > 2
       count += 1
     end
-    
+
     res.push(count * 4)
   end
 
