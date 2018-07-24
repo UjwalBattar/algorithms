@@ -42,9 +42,18 @@ class HashMap
   end
 
   def resize!
+    new_length = num_buckets * 2
+    new_store = HashMap.new(new_length)
+    @store.each do |list|
+      list.each do |el|
+        new_store[el.hash % new_length].append(el)
+      end
+    end
+    @store = new_store
   end
 
   def bucket(key)
     # optional but useful; return the bucket corresponding to `key`
+    @store[key.hash % num_buckets]
   end
 end
