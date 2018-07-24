@@ -29,7 +29,7 @@ class LinkedList
     @tail = Node.new
     @head.next = @tail
     @tail.prev = @head
-    @length = 0
+    # @length = 0
   end
 
   def [](i)
@@ -46,7 +46,8 @@ class LinkedList
   end
 
   def empty?
-    @length == 0
+    # @length == 0
+    @head.next == @tail
   end
 
   def get(key)
@@ -65,7 +66,7 @@ class LinkedList
     new_node.prev = @tail.prev
     new_node.next = @tail
     @tail.prev = new_node
-    @length += 1
+    # @length += 1
   end
 
   def update(key, val)
@@ -75,7 +76,7 @@ class LinkedList
   def remove(key)
     self.each do |node|
       if node.key == key
-        @length -= 1
+        # @length -= 1
         return node.remove
       end
     end
