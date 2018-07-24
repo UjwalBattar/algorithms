@@ -11,13 +11,19 @@ class BinaryMinHeap
   end
 
   def extract
-
+    @store.pop if count < 3
+    @store[0], @store[count - 1] = @store[count - 1], @store[0]
+    BinaryMinHeap.heapify_down(@store, 0, count - 1, &@prc) if count > 1
+    @store.pop
   end
 
   def peek
+    @store[0]
   end
 
   def push(val)
+    @store.push(val)
+    BinaryMinHeap.heapify_up(@store, count - 1, count, &@prc) if count > 1
   end
 
   public

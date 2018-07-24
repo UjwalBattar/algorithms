@@ -14,7 +14,7 @@ class BinaryMinHeap
     @store.pop if count < 3
     @store[0], @store[count-1] = @store[count-1], @store[0]
     BinaryMinHeap.heapify_down(@store, 0, count - 1, &@prc) if count > 1
-    @store.pop
+    puts @store.pop
   end
 
   def peek
