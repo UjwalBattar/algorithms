@@ -8,26 +8,25 @@ class QuickSort
 
     pivot = array[0]
 
-    left = QuickSort.sort1(array[1..-1].select { |el| el < pivot })
-    right = QuickSort.sort1(arry[1..-1].select { |el| el >= pivot })
+    left = QuickSort.sort1(array[1..-1].select { |el| el <= pivot })
+    right = QuickSort.sort1(array[1..-1].select { |el| el > pivot })
 
-    left.concat([pivot]).concat(right)
+    left + pivot + right
   end
 
   # In-place.
   def self.sort2!(array, start = 0, length = array.length, &prc)
     prc ||= Proc.new { |el1, el2| el1 <=> el2 }
 
-    return if length < 2
+    return array if length < 2
 
     pivot_idx = partition(array, start, length, &prc)
 
     left_length = pivot_idx - start
     right_length = length - (pivot_idx + 1)
 
-    sort2!(array, start, left_length, &prc)
-    sort2!(array, pivot_idx + 1, right_length, &prc)
-
+    QuickSort.sort2!(array, start, left_length, &prc)
+    QuickSort.sort2!(array, pivot_idx + 1, right_length, &prc)
   end
 
   def self.partition(array, start, length, &prc)
@@ -36,9 +35,9 @@ class QuickSort
     pivot_idx = start
     pivot = array[start]
 
-    ((start + 1)...(start + length)).each do |idx|
-      if prc.call(pivot, array[idx]) == 1
-        array[idx], array[pivot_idx + 1] = array[pivot_idx + 1], array[idx]
+    ((start + 1)...length + start).each do |i|
+      if prc.call(pivot, array[i]) == 1
+        array[i], array[pivot_idx + 1] = array[pivot_idx + 1], array[i]
         pivot_idx += 1
       end
     end
