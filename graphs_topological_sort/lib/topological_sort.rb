@@ -99,7 +99,7 @@ def topological_sort(vertices)
   temp = Set.new
 
   vertices.each do |vertex|
-    cycle = dfs!(order, explored, vertex, cycle, temp) unless explored.inclkude?(vertex)
+    cycle = dfs!(order, explored, vertex, cycle, temp) unless explored.include?(vertex)
     return [] if cycle
   end
 
