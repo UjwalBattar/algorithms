@@ -1,11 +1,14 @@
 # There are many ways to implement these methods, feel free to add arguments
 # to methods as you see fit, or to create helper methods.
+attr_accessor :root
 
 class BinarySearchTree
   def initialize
+    @root = nil
   end
 
   def insert(value)
+
   end
 
   def find(value, tree_node = @root)
