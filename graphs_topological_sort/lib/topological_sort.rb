@@ -60,7 +60,56 @@
 # end
 
 # Tarjan's algorigthm without cycle catching
+require_relative 'graph'
+require 'set'
+
+# def topological_sort(vertices)
+#   order = []
+#   explored = Set.new
+#
+#   vertices.each do |vertex|
+#     order += dfs!(order, explored, vertex) unless explored.include?(vertex)
+#   end
+#   order
+# end
+#
+# def dfs!(order, explored, vertex)
+#   explored.add(vertex)
+#
+#   vertex.out_edges.each do |edge|
+#     to_vertex = edge.to_vertex
+#     dfs!(order, explored, to_vertex) unless explored.include?(to_vertex)
+#   end
+#   order.unshift(vertex)
+# end
+
+#  Tarjan's algorithm with cycle catching
 
 def topological_sort(vertices)
+  order = []
+  explored = Set.new
+  cycle = false
+  temp = Set.new
 
+  vertices.each do |vertex|
+    cycle = dfs!(order, explored, vertex, cycle, temp) unless explored.include?(vertex)
+    return [] if cycle
+  end
+  order
+end
+
+def dfs!(order, explored, vertex, cycle, temp)
+  return true if temp.include?(vertex)
+  temp.add(vertex)
+
+  vertex.out_edges.each do |edge|
+    to_vertex = edge.to_vertex
+    cycle = dfs!(order, explored, to_vertex, cycle, temp) unless explored.include?(to_vertex)
+    return true if cycle
+  end
+
+  temp.delete(vertex)
+  explored.add(vertex)
+  order.unshift(vertex)
+  false
 end
