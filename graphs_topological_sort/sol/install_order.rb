@@ -34,7 +34,7 @@ require_relative 'topological_sort'
 def install_order(arr)
   vertices = {}
   max = 0
-  
+
   arr.each do |tuple|
     vertices[tuple[0]] = Vertex.new(tuple[0]) unless vertices[tuple[0]]
     vertices[tuple[1]] = Vertex.new(tuple[1]) unless vertices[tuple[1]]
