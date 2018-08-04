@@ -45,9 +45,9 @@ def topological_sort(vertices)
   end
 
   until queue.empty?
-    current - queue.shift
+    current = queue.shift
 
-    current.out_edges .each do |edge|
+    current.out_edges.each do |edge|
       to_vertex = edge.to_vertex
       in_edges[to_vertex] -= edge.cost
       queue << to_vertex if in_edges[to_vertex] == 0
@@ -69,7 +69,7 @@ end
 #   explored = Set.new
 #
 #   vertices.each do |vertex|
-#     dfs!(order, explored, vertex) unless explored.inclkude?(vertex)
+#     dfs!(order, explored, vertex) unless explored.include?(vertex)
 #   end
 #
 #   order
