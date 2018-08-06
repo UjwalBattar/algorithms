@@ -49,7 +49,7 @@ var isEven = function(n) {
 // sumBelow(7); // 21
 var sumBelow = function(n) {
   if (n === 0 || n === -1 || n === 1) return 0;
-  let sign = n < 0 ? -1 : 1
+  let sign = n < 0 ? -1 : 1;
   n = Math.abs(n);
 
   return sign * (sumBelow(n - 1) + (n - 1));
@@ -73,6 +73,12 @@ var range = function(x, y) {
 // exponent(4,3); // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 var exponent = function(base, exp) {
+  if (exp === 0) return 1;
+  let frac = exp < 0 ? true : false;
+  let e = exp < 0 ? exp * -1 : exp
+  let sign = (base < 0 && e % 2 === 1) ? -1 : 1;
+  let ans = base * exponent(base, e - 1);
+  return (frac === true ? (1 / ans) : ans);
 };
 
 // 8. Determine if a number is a power of two.
