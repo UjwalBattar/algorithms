@@ -63,7 +63,6 @@ var range = function(x, y) {
   if (b - a === 2) return [b - 1];
   let prevRange = range(a, b - 1);
   prevRange.push(b - 1);
-  console.log(prevRange);
   return x > y ? prevRange.reverse() : prevRange;
 };
 
@@ -86,14 +85,33 @@ var exponent = function(base, exp) {
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
+  if (n < 1) return false;
+  if (n === 1) return true;
+  if (n === 2) {
+    return true;
+  } else {
+    return powerOfTwo(n / 2)
+  }
 };
 
 // 9. Write a function that reverses a string.
 var reverse = function(string) {
+  if (string.length <= 1) return string;
+  let ans = reverse(string.slice(1));
+  return ans += string[0];
 };
 
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.replace(/ /g, "");
+  if (string.length <= 1) return true;
+  let i = 0;
+  let j = (string.length - 1);
+  if (string[i].toLowerCase() !== string[j].toLowerCase()) {
+    return false;
+  } else {
+    return palindrome(string.slice(1, string.length - 1));
+  }
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -102,16 +120,40 @@ var palindrome = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (y === 0) return NaN;
+  let sign = (x < 0) ? true : false;
+  if (y < 0) {
+    if (y < x) return x;
+  } else if (x === y) {
+    return 0;
+  } else if (x < y) {
+    return x;
+  } else {
+    return sign ?  0 - (modulo(x - y, y)) : (modulo(x - y, y));
+  };
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
 // Math methods.
 var multiply = function(x, y) {
+  if (x === 0 || y === 0) return 0;
+  let sign = ((x > 0 && y > 0) || (x < 0 && y < 0)) ? true : false;
+  x = x < 0 ? (0 - x) : x;
+  y = y < 0 ? (0 - y) : y;
+  return (sign) ? (multiply(x, y - 1) + x) : -(multiply(x, y - 1) + x)
 };
 
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods to arrive at an approximate quotient (ignore decimal endings).
 var divide = function(x, y) {
+  if (y === 0) return NaN;
+  if (x <= 0 || x < y) return 0;
+  if (x === y) return 1;
+  let sign = ((x > 0 && y > 0) || (x < 0 && y < 0)) ? true : false;
+  x = x < 0 ? (0 - x) : x;
+  y = y < 0 ? (0 - y) : y;
+  let ans = (divide(x - y, y) + 1)
+  return sign ? ans : -ans;
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
@@ -120,6 +162,9 @@ var divide = function(x, y) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+  if (x < 0 || y < 0) return null;
+  if (!y) return x;
+  return gcd(y, x % y);
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
@@ -127,6 +172,11 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+  if (str1.length === 0 && str2.length === 0) return true;
+  if (str1.length === 0 || str2.length === 0) return false;
+
+  if (str1[0] !== str2[0]) return false;
+  return compareStr(str1.slice(1), str2.slice(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
@@ -142,6 +192,10 @@ var reverseArr = function(array) {
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
 var buildList = function(value, length) {
+  if (length === 0) return [];
+  let list = []
+  buildList(value, length - 1)
+  return list.push(value)
 };
 
 // 19. Implement FizzBuzz. Given integer n, return an array of the string representations of 1 to n.
