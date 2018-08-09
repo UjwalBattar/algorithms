@@ -299,6 +299,12 @@ var replaceKeysInObj = function(obj, oldKey, newKey) {
 // fibonacci(5); // [0,1,1,2,3,5]
 // Note: The 0 is not counted.
 var fibonacci = function(n) {
+  if (n <= 0) return null;
+  if (n === 1) return [0, 1];
+  if (n === 2) return [0, 1, 1];
+
+  let prev = fibonacci(n - 1)
+  return prev.concat(prev[prev.length - 1] + prev[prev.length - 2]);
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -307,6 +313,13 @@ var fibonacci = function(n) {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
+  if (n <= 0) return null;
+  if (n === 1) prev = [0, 1];
+  if (n === 2) prev = [0, 1, 1];
+
+  let prev = nthFibo(n - 1)
+  prev.concat(prev[prev.length - 1] + prev[prev.length - 2]);
+  return prev[n]
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
@@ -372,7 +385,19 @@ var alternateSign = function(array) {
 // 36. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
+
 var numToText = function(str) {
+
+  const nHash = {'0': "zero", '1': "one", '2': "two", '3': "three", '4': "four",
+                  '5': "five", '6': "six", '7': "seven", '8': "eight", '9': "nine"
+                }
+  if (str.length === 0) return str;
+  let prev = numToText(str.slice(0, str.length - 1))
+  if (nHash[str[str.length - 1]]) {
+    return prev + nHash[str[str.length - 1]];
+  } else {
+    return prev + str[str.length - 1];
+  }
 };
 
 
