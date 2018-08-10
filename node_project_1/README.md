@@ -1,6 +1,6 @@
 # Github-Grabber
 
-This project will provide an introduction to Node through several of its popular modules. 
+This project will provide an introduction to Node through several of its popular modules.
 We'll use Node's [fs], [process], and [http], as well as the third-party [nodemon] to build an application that fetches a user's starred repos and writes them to a file.
 
 [path]: https://nodejs.org/api/path.html#path_path
@@ -39,7 +39,7 @@ fs.readFile('./animals.txt', (err, data) => {
 
 **N.B. The order of arguments in these callbacks is very common in Node!**
 
-Run the file with `node animal_fun.js`. Yipes, that doesn't look like a string at all! We're looking at a raw [Buffer] object. 
+Run the file with `node animal_fun.js`. Yipes, that doesn't look like a string at all! We're looking at a raw [Buffer] object.
 
 Neat, but since we know this will be a text file and we'd like to make it human-readable, let's provide an additional argument to `readFile` that specifies the encoding...
 
@@ -88,7 +88,7 @@ To start, let's `console.log` the process object and see what we're dealing with
 console.log(process)
 ```
 
-Wow, that's a lot of stuff! `process` contains loads of information, so we'll narrow it down by accessing the `argv` key. `console.log(process.argv)`. We should see an array with two arguments: the absolute paths of the Node executable and the file. 
+Wow, that's a lot of stuff! `process` contains loads of information, so we'll narrow it down by accessing the `argv` key. `console.log(process.argv)`. We should see an array with two arguments: the absolute paths of the Node executable and the file.
 
 Try adding some additional words after `node animal_fun.js` and see how it comes through. For example `node animal_fun.js argv_index_2 argv_index_3 potato`. We'll have access to those additional arguments in our script by bracketing into the process.argv array starting at `process.argv[2]`.
 
@@ -106,9 +106,9 @@ You can do it!
 ## Introducing HTTP
 
 We'll now turn our attention to the [http] module, using the [createServer] method to
-create an instance of [http.Server]. 
+create an instance of [http.Server].
 
-### Nodemon 
+### Nodemon
 
 Before we dive into server-world. We're going to `npm install --save-dev nodemon`.
 
@@ -144,13 +144,13 @@ server.listen(8000, () => console.log("I'm listening on port 8000!"))
 
 ### Putting it all together, part 2
 
-Now that we have a basic HTTP server, let's redo our previous task using the HTTP request/response cycle. You may find the [querystring] module helpful. 
+Now that we have a basic HTTP server, let's redo our previous task using the HTTP request/response cycle. You may find the [querystring] module helpful.
 
 Let's handle two situations:
 
-* No letter is passed to our server and we return the entire animals.txt file 
-or 
-* A letter is passed to our server and we filter the animals starting wtih that letter.
+* No letter is passed to our server and we return the entire animals.txt file
+or
+* A letter is passed to our server and we filter the animals starting with that letter.
 
 To recap:
 
@@ -184,9 +184,9 @@ const githubServer = http.createServer((req, res) => {
 githubServer.listen(8080, () => console.log('Listening on 8080'))
 ```
 
-Let's take a quick detour and learn more about the [request] object fed into our callback as the first argument. This object is an implementation of the [writable] stream and inherits from the event [emitter] class. 
+Let's take a quick detour and learn more about the [request] object fed into our callback as the first argument. This object is an implementation of the [writable] stream and inherits from the event [emitter] class.
 
-Streams are a big topic in Node, and I'd encourage you to read more about them, but for our purposes we can think of them as collections of data _eventually_. In other words, we don't have this data all at once and we're not sure when all the data will be available. There are benefits to this, but it means we'll need to listen for certain events to be sure we're getting everything we need. 
+Streams are a big topic in Node, and I'd encourage you to read more about them, but for our purposes we can think of them as collections of data _eventually_. In other words, we don't have this data all at once and we're not sure when all the data will be available. There are benefits to this, but it means we'll need to listen for certain events to be sure we're getting everything we need.
 
 Inside our conditional for `POST` requests, declare a variable that will accumulate our data. It should start as an empty string. Add event listeners for `data` and `end` events to our request. In the callback for `data` we should add that data to our variable. In the callback for `end`, we can do whatever we need with confidence that all the data has been retrieved.
 
@@ -201,7 +201,7 @@ const githubServer = http.createServer((req, res) => {
   if (req.method === 'POST') {
     let body = ''
     req.on('data', d => {
-      // d is an instance of Buffer, 
+      // d is an instance of Buffer,
       // toString is implicitly called when we add it to body
       body += d
     })
@@ -216,7 +216,7 @@ const githubServer = http.createServer((req, res) => {
 
 Okay! We've written a decent amount of code, so let's test that it works. I used [curl] to post a username to my server, but you could use POSTMAN or other tools... Check to make sure your server is printing out the username you're POSTing.
 
-Once you have successfully parsed the username, it's time to make our call to Github's API. We'll use the [https] module to make our request because Github requires that protocol. `https.get` takes an options object to configure the [request], check it out! 
+Once you have successfully parsed the username, it's time to make our call to Github's API. We'll use the [https] module to make our request because Github requires that protocol. `https.get` takes an options object to configure the [request], check it out!
 
 Github has a friendly REST [API], look up the appropriate URL for your request. The API requires a [user-agent] header be set, make sure that's included in your [request] configuration object.
 
