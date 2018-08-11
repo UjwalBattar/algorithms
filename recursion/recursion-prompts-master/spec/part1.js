@@ -1426,137 +1426,137 @@
     //
     //
     //
-    describe('26. Return nth Fibonacci', function() {
-      var originalNthFibo;
-
-      before(function() {
-        originalNthFibo = nthFibo;
-        nthFibo = sinon.spy(nthFibo);
-      });
-
-      afterEach(function() {
-        nthFibo.reset();
-      });
-
-      after(function() {
-        nthFibo = originalNthFibo;
-      });
-
-      it('should return a number', function() {
-        expect(nthFibo(5)).to.be.a('number');
-      });
-
-      it('should return the nth nthFibo number', function() {
-        expect(nthFibo(0)).to.equal(0);
-        expect(nthFibo(1)).to.equal(1);
-        expect(nthFibo(2)).to.equal(1);
-        expect(nthFibo(3)).to.equal(2);
-        expect(nthFibo(4)).to.equal(3);
-        expect(nthFibo(5)).to.equal(5);
-        expect(nthFibo(8)).to.equal(21);
-      });
-
-      it('should return null for negative integers', function() {
-        expect(nthFibo(-5)).to.be.null;
-        expect(nthFibo(-7)).to.be.null;
-      });
-
-      it('should use recursion by calling self', function() {
-        nthFibo(5);
-        expect(nthFibo.callCount).to.be.above(1);
-      });
-
-      it('should be invoked with one argument', function() {
-        nthFibo(5);
-        nthFibo.args.forEach(arg => {
-          expect(arg).to.have.length(1);
-        });
-      });
-
-    });
-
-
-
-    describe('27. Capitalize words in array', function() {
-      var originalCapitalizeWords;
-
-      before(function() {
-        originalCapitalizeWords = capitalizeWords;
-        capitalizeWords = sinon.spy(capitalizeWords);
-      });
-
-      afterEach(function() {
-        capitalizeWords.reset();
-      });
-
-      after(function() {
-        capitalizeWords = originalCapitalizeWords;
-      });
-
-      it('should return an array', function() {
-        expect(capitalizeWords(['recursion'])).to.be.an('array');
-      });
-
-      it('should capitalize all words in array', function() {
-        expect(capitalizeWords(["ceci","n'est","pas","une","pipe"])).to.eql(["CECI", "N'EST", "PAS", "UNE", "PIPE"]);
-      });
-
-      it('should use recursion by calling self', function() {
-        capitalizeWords(['i','am','learning','recursion']);
-        expect(capitalizeWords.callCount).to.be.above(1);
-      });
-
-      it('should be invoked with one argument', function() {
-        capitalizeWords(['you','got','this']);
-        capitalizeWords.args.forEach(arg => {
-          expect(arg).to.have.length(1);
-        });
-      });
-
-    });
-
-
-
-    describe('28. Capitalize first letter of words in array', function() {
-      var originalCapitalizeFirst;
-
-      before(function() {
-        originalCapitalizeFirst = capitalizeFirst;
-        capitalizeFirst = sinon.spy(capitalizeFirst);
-      });
-
-      afterEach(function() {
-        capitalizeFirst.reset();
-      });
-
-      after(function() {
-        capitalizeFirst = originalCapitalizeFirst;
-      });
-
-      it('should return an array', function() {
-        expect(capitalizeFirst(['recursion'])).to.be.an('array');
-      });
-
-      it('should capitalize first letter of each word in array', function() {
-        expect(capitalizeFirst(["ceci","n'est","pas","une","pipe"])).to.eql(["Ceci", "N'est", "Pas", "Une", "Pipe"]);
-      });
-
-      it('should use recursion by calling self', function() {
-        capitalizeFirst(["ceci","n'est","pas","une","pipe"]);
-        expect(capitalizeFirst.callCount).to.be.above(1);
-      });
-
-      it('should be invoked with one argument', function() {
-        capitalizeFirst(['you','got','this']);
-        capitalizeFirst.args.forEach(arg => {
-          expect(arg).to.have.length(1);
-        });
-      });
-
-    });
-
-
-
+    // describe('26. Return nth Fibonacci', function() {
+    //   var originalNthFibo;
+    //
+    //   before(function() {
+    //     originalNthFibo = nthFibo;
+    //     nthFibo = sinon.spy(nthFibo);
+    //   });
+    //
+    //   afterEach(function() {
+    //     nthFibo.reset();
+    //   });
+    //
+    //   after(function() {
+    //     nthFibo = originalNthFibo;
+    //   });
+    //
+    //   it('should return a number', function() {
+    //     expect(nthFibo(5)).to.be.a('number');
+    //   });
+    //
+    //   it('should return the nth nthFibo number', function() {
+    //     expect(nthFibo(0)).to.equal(0);
+    //     expect(nthFibo(1)).to.equal(1);
+    //     expect(nthFibo(2)).to.equal(1);
+    //     expect(nthFibo(3)).to.equal(2);
+    //     expect(nthFibo(4)).to.equal(3);
+    //     expect(nthFibo(5)).to.equal(5);
+    //     expect(nthFibo(8)).to.equal(21);
+    //   });
+    //
+    //   it('should return null for negative integers', function() {
+    //     expect(nthFibo(-5)).to.be.null;
+    //     expect(nthFibo(-7)).to.be.null;
+    //   });
+    //
+    //   it('should use recursion by calling self', function() {
+    //     nthFibo(5);
+    //     expect(nthFibo.callCount).to.be.above(1);
+    //   });
+    //
+    //   it('should be invoked with one argument', function() {
+    //     nthFibo(5);
+    //     nthFibo.args.forEach(arg => {
+    //       expect(arg).to.have.length(1);
+    //     });
+    //   });
+    //
+    // });
+    //
+    //
+    //
+    // describe('27. Capitalize words in array', function() {
+    //   var originalCapitalizeWords;
+    //
+    //   before(function() {
+    //     originalCapitalizeWords = capitalizeWords;
+    //     capitalizeWords = sinon.spy(capitalizeWords);
+    //   });
+    //
+    //   afterEach(function() {
+    //     capitalizeWords.reset();
+    //   });
+    //
+    //   after(function() {
+    //     capitalizeWords = originalCapitalizeWords;
+    //   });
+    //
+    //   it('should return an array', function() {
+    //     expect(capitalizeWords(['recursion'])).to.be.an('array');
+    //   });
+    //
+    //   it('should capitalize all words in array', function() {
+    //     expect(capitalizeWords(["ceci","n'est","pas","une","pipe"])).to.eql(["CECI", "N'EST", "PAS", "UNE", "PIPE"]);
+    //   });
+    //
+    //   it('should use recursion by calling self', function() {
+    //     capitalizeWords(['i','am','learning','recursion']);
+    //     expect(capitalizeWords.callCount).to.be.above(1);
+    //   });
+    //
+    //   it('should be invoked with one argument', function() {
+    //     capitalizeWords(['you','got','this']);
+    //     capitalizeWords.args.forEach(arg => {
+    //       expect(arg).to.have.length(1);
+    //     });
+    //   });
+    //
+    // });
+    //
+    //
+    //
+    // describe('28. Capitalize first letter of words in array', function() {
+    //   var originalCapitalizeFirst;
+    //
+    //   before(function() {
+    //     originalCapitalizeFirst = capitalizeFirst;
+    //     capitalizeFirst = sinon.spy(capitalizeFirst);
+    //   });
+    //
+    //   afterEach(function() {
+    //     capitalizeFirst.reset();
+    //   });
+    //
+    //   after(function() {
+    //     capitalizeFirst = originalCapitalizeFirst;
+    //   });
+    //
+    //   it('should return an array', function() {
+    //     expect(capitalizeFirst(['recursion'])).to.be.an('array');
+    //   });
+    //
+    //   it('should capitalize first letter of each word in array', function() {
+    //     expect(capitalizeFirst(["ceci","n'est","pas","une","pipe"])).to.eql(["Ceci", "N'est", "Pas", "Une", "Pipe"]);
+    //   });
+    //
+    //   it('should use recursion by calling self', function() {
+    //     capitalizeFirst(["ceci","n'est","pas","une","pipe"]);
+    //     expect(capitalizeFirst.callCount).to.be.above(1);
+    //   });
+    //
+    //   it('should be invoked with one argument', function() {
+    //     capitalizeFirst(['you','got','this']);
+    //     capitalizeFirst.args.forEach(arg => {
+    //       expect(arg).to.have.length(1);
+    //     });
+    //   });
+    //
+    // });
+    //
+    //
+    //
     describe('29. Sum even numbers in nested objects', function() {
       var originalNestedEvenSum, input;
 
