@@ -397,18 +397,35 @@ var letterTally = function(str, obj= {}) {
 // compress([1,2,2,3,4,4,5,5,5]) // [1,2,3,4,5]
 // compress([1,2,2,3,4,4,2,5,5,5,4,4]) // [1,2,3,4,2,5,4]
 var compress = function(list) {
+  if (list.length === 0) return list;
+  let prev = compress(list.slice(0, list.length - 1));
+  if (list[list.length - 1] !== prev[prev.length - 1]) {
+    prev.push(list[list.length - 1]);
+  }
+  return prev;
 };
 
 // 33. Augument every element in a list with a new value where each element is an array
 // itself.
 // augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
 var augmentElements = function(array, aug) {
+  if (array.length === 0) return array;
+  let prev = augmentElements(array.slice(0, array.length - 1), aug);
+  return prev.concat([array[array.length - 1].concat([aug])]);
 };
 
 // 34. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 var minimizeZeroes = function(array) {
+  if (array.length === 0) return array;
+  let prev = minimizeZeroes(array.slice(0, array.length - 1));
+  if (array[array.length - 1] === 0) {
+    if (prev[prev.length - 1] !== 0) prev.push(0);
+  } else {
+    prev.push(array[array.length - 1]);
+  }
+  return prev;
 };
 
 // 35. Alternate the numbers in an array between positive and negative regardless of
@@ -416,6 +433,14 @@ var minimizeZeroes = function(array) {
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 var alternateSign = function(array) {
+  if (array.length === 0) return array;
+  let prev = [].concat(alternateSign(array.slice(0, array.length - 1)));
+  if (array.length % 2 === 0) {
+    prev.push(Math.abs(array[array.length - 1]) * -1);
+  } else {
+    prev.push(Math.abs(array[array.length - 1]));
+  }
+  return prev;
 };
 
 // 36. Given a string, return a string with digits converted to their word equivalent.
@@ -441,6 +466,7 @@ var numToText = function(str) {
 
 // 37. Return the number of times a tag occurs in the DOM.
 var tagCount = function(tag, node) {
+  
 };
 
 // 38. Write a function for binary search.
