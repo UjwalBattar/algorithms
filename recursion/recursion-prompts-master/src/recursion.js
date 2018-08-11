@@ -536,4 +536,5 @@ function merge(left, right) {
 // console.log(obj2); // {a:1,b:{bb:{bbb:2}},c:3}
 // obj1 === obj2 // false
 var clone = function(input) {
+  
 };
