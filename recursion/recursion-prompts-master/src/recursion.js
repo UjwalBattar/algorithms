@@ -466,21 +466,69 @@ var numToText = function(str) {
 
 // 37. Return the number of times a tag occurs in the DOM.
 var tagCount = function(tag, node) {
+  if (node === null) return 0;
+  let count = 0;
 
+  if (node) {
+    if (node.tagName === (tag.toUpperCase())) {
+      count += 1;
+    }
+    if (node.nextSibling) {
+      console.log("11111", node.nextSibling);
+      count = count + tagCount(tag, node.nextSibling);
+    }
+    if (node.children) {
+      console.log(node.children);
+      count = count + tagCount(tag, node.firstChild);
+    }
+  }
+  return count;
 };
 
 // 38. Write a function for binary search.
 // var array = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 // binarySearch(array, 5) // 5
 // https://www.khanacademy.org/computing/computer-science/algorithms/binary-search/a/binary-search
-var binarySearch = function(array, target, min, max) {
+var binarySearch = function(array, target, min = 0 , max = array.length - 1) {
+  if (array.length <= 0) return null;
+  if (target < array[min] || target > array[max]) return null;
+
+  let mid = Math.floor(array.length / 2);
+
+  if (array[mid] === target) {
+    return mid;
+  } else if (target < array[mid]) {
+    return binarySearch(array.slice(0, mid), target, min, max);
+  } else {
+    let subProblem = binarySearch(array.slice(mid + 1), target, min, max);
+    return subProblem === null ? null : (subProblem + mid + 1);
+  }
+
+  return null
 };
 
 // 39. Write a merge sort function.
 // mergeSort([34,7,23,32,5,62]) // [5,7,23,32,34,62]
 // https://www.khanacademy.org/computing/computer-science/algorithms/merge-sort/a/divide-and-conquer-algorithms
 var mergeSort = function(array) {
+  if (array.length <= 1) return array;
+  let mid = Math.floor(array.length / 2);
+  let left = mergeSort(array.slice(0, mid));
+  let right = mergeSort(array.slice(mid));
+  return merge(left, right);
 };
+
+function merge(left, right) {
+  let sorted = [];
+  while(left.length > 0 && right.length > 0) {
+    if (left[0] < right[0]) {
+      sorted.push(left.shift());
+    } else {
+      sorted.push(right.shift());
+    }
+  }
+  return sorted.concat(left, right);
+}
 
 // 40. Deeply clone objects and arrays.
 // var obj1 = {a:1,b:{bb:{bbb:2}},c:3};
