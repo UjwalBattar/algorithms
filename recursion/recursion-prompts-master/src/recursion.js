@@ -449,16 +449,16 @@ var alternateSign = function(array) {
 
 var numToText = function(str) {
 
-  // const nHash = {'0': "zero", '1': "one", '2': "two", '3': "three", '4': "four",
-  //                 '5': "five", '6': "six", '7': "seven", '8': "eight", '9': "nine"
-  //               }
-  // if (str.length === 0) return str;
-  // let prev = numToText(str.slice(0, str.length - 1))
-  // if (nHash[str[str.length - 1]]) {
-  //   return prev + nHash[str[str.length - 1]];
-  // } else {
-  //   return prev + str[str.length - 1];
-  // }
+  const nHash = {'0': "zero", '1': "one", '2': "two", '3': "three", '4': "four",
+                  '5': "five", '6': "six", '7': "seven", '8': "eight", '9': "nine"
+                }
+  if (str.length === 0) return str;
+  let prev = numToText(str.slice(0, str.length - 1))
+  if (nHash[str[str.length - 1]]) {
+    return prev + nHash[str[str.length - 1]];
+  } else {
+    return prev + str[str.length - 1];
+  }
 };
 
 
