@@ -13,6 +13,32 @@
 // The algorithm there is not quite the same as the algorithm required
 // here, but it's similar.
 
-function ascii_deletion_distance(str1, str2) {
-  
+function asciiDeletionDistance(str1, str2) {
+  let charHash = {};
+  let count = 0;
+
+  for (let i = 0; i < str1.length; i++) {
+    if (charHash[str1[i]]) {
+      charHash[str1[i]] += str1[i].charCodeAt(0);
+    } else {
+      charHash[str1[i]] = str1[i].charCodeAt(0);
+    }
+  }
+
+  for (let i = 0; i < str2.length; i++) {
+    if (charHash[str2[i]]) {
+      charHash[str2[i]] -= str2[i].charCodeAt(0);
+    } else {
+      count += str2[i].charCodeAt(0);
+    }
+  }
+
+   Object.values(charHash).forEach (val => {
+     count += val;
+   });
+
+   return count;
 }
+
+// asciiDeletionDistance("cat", "at");
+// asciiDeletionDistance("thought", "sloughs");

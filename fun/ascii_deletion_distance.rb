@@ -15,25 +15,25 @@
 
 def ascii_deletion_distance(str1, str2)
   letter_hash = {}
-
+  count = 0
   str1.chars.each do |c1|
-    if !letter_hash[c1].nil?
-      letter_hash[c1] += c1.ord
-    else
+    if letter_hash[c1].nil?
       letter_hash[c1] = c1.ord
+    else
+      letter_hash[c1] += c1.ord
     end
   end
 
   str2.chars.each do |c2|
-
-    if !letter_hash[c2].nil?
-      letter_hash[c2] -= c2.ord
+    if letter_hash[c2].nil?
+      count += c2.ord
     else
-      letter_hash[c2] = c2.ord
+      letter_hash[c2] -= c2.ord
     end
   end
-  p letter_hash
-  return letter_hash.values.reduce(:+)
+
+  return letter_hash.values.reduce(:+) + count
 end
 
 ascii_deletion_distance("cat", "at")
+ascii_deletion_distance("thought", "sloughs")
