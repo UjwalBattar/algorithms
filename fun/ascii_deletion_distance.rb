@@ -16,6 +16,7 @@
 def ascii_deletion_distance(str1, str2)
   letter_hash = {}
   count = 0
+
   str1.chars.each do |c1|
     if letter_hash[c1].nil?
       letter_hash[c1] = c1.ord
