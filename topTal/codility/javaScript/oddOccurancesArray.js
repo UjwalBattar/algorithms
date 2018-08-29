@@ -39,10 +39,10 @@
 //   storage required for input arguments).
 function oddOccurancesInArray(a) {
   let res = 0;
-  for (let el in a) {
+  for (let el of a) {
     res ^= el;
   }
   return res;
 }
 
-oddOccurancesInArray([9, 3, 9, 3, 5, 7, 5, 9, 9])
+oddOccurancesInArray([9, 3, 9, 3, 5, 7, 5, 9, 9]);
