@@ -32,21 +32,21 @@
 # expected worst-case space complexity is O(1).
 
 def binary_gap(n)
-  s = n.to_s(2)
-  count = 0
-  temp = 0
-  i = 1
-  while i < s.length
-
-    while s[i] == "0"
-      temp += 1
-      i += 1
-    end
-    if s[i] == "1"
-      count = [temp, count].max
-      temp = 0
-    end
-    i += 1
-  end
+  # s = n.to_s(2)
+  # count = 0
+  # temp = 0
+  # i = 1
+  # while i < s.length
+  #
+  #   while s[i] == "0"
+  #     temp += 1
+  #     i += 1
+  #   end
+  #   if s[i] == "1"
+  #     count = [temp, count].max
+  #     temp = 0
+  #   end
+  #   i += 1
+  # end
   count
 end
