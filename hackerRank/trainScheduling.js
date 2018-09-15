@@ -122,3 +122,7 @@
 // msg 1.
 // msg 3.
 // msg 2.
+
+function trainScheduler(input) {
+  
+}
