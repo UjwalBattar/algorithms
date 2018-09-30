@@ -49,4 +49,4 @@ function isListPalindrome(l) {
     firstHead = firstHead.next;
   }
   return true;
-}
+}z
