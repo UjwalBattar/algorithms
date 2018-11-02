@@ -1,19 +1,19 @@
 function budgetShopping(n, bQ, bC) {
     let max = 0;
+    // console.log(max);
+    max = calculate(n, bQ, bC, max);
 
-    function calculate(n, bC, bQ, max, pos, count) {
-        if (n === 0 || pos === bC.length) {
-            max = Math.max(count, max);
-            return;
-        }
-
-        for (let i = 0; i <= n / bC[pos]; i++) {
-            calculate(n - i * bC[pos], bC, bQ, max, pos + 1, count + i * bQ[pos])
-        }
-    }
     console.log(max);
 
-    calculate(n, bC, bQ, max, 0, 0);
+    return max;
+}
+
+function calculate(n, bQ, bC, max) {
+    // console.log(max);
+    if (n <= 0) return max;
+    for (let i = 0; i < bQ.length; i++) {
+        max = Math.max(calculate(n - bC[i], bQ, bC, max + bQ[i]), max);
+    }
 }
 
 budgetShopping(50, [20, 19], [24, 20]);
