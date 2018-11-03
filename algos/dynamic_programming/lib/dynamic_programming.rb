@@ -58,7 +58,7 @@ class DynamicProgramming
   end
 
   def frog_hops_top_down_helper(n)
-    return @frog_cache if @frog_cache[n]
+    return @frog_cache[n] if @frog_cache[n]
     result = []
     1.upto(3) do |i|
       result.concat(frog_hops_top_down_helper(n - i).map {|j| j + [i]})
