@@ -3,6 +3,7 @@ class DynamicProgramming
   def initialize
     @blair_cache = {1 => 1, 2 => 2}
     @frog_cache = {1 => [[1]], 2 => [[1, 1], [2]], 3 => [[1, 1, 1], [1, 2], [2, 1], [3]]}
+    @super_cahce = {0 => [[]], 1 => [[1]]}
   end
 
   def blair_nums(n)
@@ -68,7 +69,19 @@ class DynamicProgramming
   end
 
   def super_frog_hops(n, k)
+    cache = super_frog_hops_helper(n, k)
+    cache[n]
+  end
 
+  def super_frog_hops_helper(n, k)
+    return @super_cache if n < 2
+    2.upto(n) do |i|
+      @super_cache[i] = []
+      1.upto(k) do |j|
+        @super_cache[i].concat(@super_cache[i - j].map { |x| x + [j]}) if i >= j
+      end
+    end
+    @super_cache
   end
 
   def knapsack(weights, values, capacity)
