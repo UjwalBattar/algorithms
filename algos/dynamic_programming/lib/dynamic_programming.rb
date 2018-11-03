@@ -3,7 +3,7 @@ class DynamicProgramming
   def initialize
     @blair_cache = {1 => 1, 2 => 2}
     @frog_cache = {1 => [[1]], 2 => [[1, 1], [2]], 3 => [[1, 1, 1], [1, 2], [2, 1], [3]]}
-    @super_cahce = {0 => [[]], 1 => [[1]]}
+    @super_cache = {0 => [[]], 1 => [[1]]}
   end
 
   def blair_nums(n)
