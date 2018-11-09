@@ -85,9 +85,9 @@ class DynamicProgramming
   end
 
   def knapsack(weights, values, capacity)
-    @knapsack = { 0 => Array.new(weights.length, 0) }
+     # p @knapsack.sort_by {|k,v| k} #checks cache
+    @knapsack = { 0 => Array.new(weights.length, 0)}
     knapsack_table(weights, values, capacity)
-    # p @knapsack.sort_by {|k,v| k} #checks cache
     @knapsack[capacity].last
   end
 
@@ -99,22 +99,28 @@ class DynamicProgramming
   def knapsack_table(weights, values, capacity)
     return 0 if capacity <= 0 || weights.length == 0
 
-    i = weights.length -   1
+    i = weights.length - 1
 
     @knapsack[capacity] = [] if @knapsack[capacity].nil?
 
     return @knapsack[capacity][i] if @knapsack[capacity][i]
 
     prev = knapsack_table(weights[0...i], values[0...i], capacity)
-    other = knapsack_table(weights[0...i], values[0...i], capacity - weights[i]) + values[i]
+    puts "prev #{prev}"
+    other = knapsack_table(weights[0...i], values[0...1], capacity - weights[i]) + values[i]
+    puts "other #{other}"
     return prev if weights[i] > capacity
     choices = [prev, other]
+    puts "choices #{choices}"
     max = choices.max
-    @knapsack[capacity][i] = max
+    puts "max #{max}"
+    @knapsack[capacity[i]] = max
+    puts "@knapsack #{@knapsack}"
     max
   end
 
   def maze_solver(maze, start_pos, end_pos)
+    
   end
 end
 
