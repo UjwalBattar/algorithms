@@ -85,39 +85,36 @@ class DynamicProgramming
   end
 
   def knapsack(weights, values, capacity)
-     # p @knapsack.sort_by {|k,v| k} #checks cache
-    @knapsack = { 0 => Array.new(weights.length, 0)}
+    @knapsack = { 0 => Array.new(weights.length, 0) }
     knapsack_table(weights, values, capacity)
+    # p @knapsack.sort_by {|k,v| k} #checks cache
     @knapsack[capacity].last
   end
 
   # Helper method for bottom-up implementation
-  # you must select the optimum from between these two paradigms: 
-    # use either the previous item solution at this capacity, 
-    # or the previous item solution from a smaller bag plus this 
-    # item's value.
+  # you must select the optimum from between these two paradigms: use either the previous item solution at this capacity, or the previous item solution from a smaller bag plus this item's value.
   def knapsack_table(weights, values, capacity)
     return 0 if capacity <= 0 || weights.length == 0
 
-    i = weights.length - 1
+    i = weights.length -   1
 
     @knapsack[capacity] = [] if @knapsack[capacity].nil?
 
     return @knapsack[capacity][i] if @knapsack[capacity][i]
 
     prev = knapsack_table(weights[0...i], values[0...i], capacity)
-    puts "prev #{prev}"
-    other = knapsack_table(weights[0...i], values[0...1], capacity - weights[i]) + values[i]
-    puts "other #{other}"
+    other = knapsack_table(weights[0...i], values[0...i], capacity - weights[i]) + values[i]
+
     return prev if weights[i] > capacity
+
     choices = [prev, other]
-    puts "choices #{choices}"
     max = choices.max
-    puts "max #{max}"
-    @knapsack[capacity[i]] = max
-    puts "@knapsack #{@knapsack}"
+
+    @knapsack[capacity][i] = max
+    
     max
   end
+  # knapsack([23, 31, 29, 44, 53, 38, 63, 85, 89, 82 ], [ 92, 57, 49, 68, 60, 43, 67, 84, 87, 72 ], 23)
 
   def maze_solver(maze, start_pos, end_pos)
     
