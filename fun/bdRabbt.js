@@ -111,40 +111,40 @@ const FOOD = [
     ]]
 ];
 
-function getNTopItemsOfType(count, types) {
-    let items = {};
-    FOOD.forEach(type => {
-        if (types.includes(type[0])) {
-            type[1].forEach(item => {
-                if (items[item[1]]) {
-                    items.push([type[0], item[0], item[1]]);
-                } else {
+// function getNTopItemsOfType(count, types) {
+//     let items = {};
+//     FOOD.forEach(type => {
+//         if (types.includes(type[0])) {
+//             type[1].forEach(item => {
+//                 if (items[item[1]]) {
+//                     items.push([type[0], item[0], item[1]]);
+//                 } else {
 
-                    items[item[1]] = [
-                        [type[0], item[0], item[1]]
-                    ];
-                }
-            });
-        }
-    });
-    let res = [];
-    types = types.sort();
-    let amounts = Object.keys(items).sort((a, b) => b - a);
-    let i = 0;
-    while (res.length < count) {
-        items[amounts[i]].forEach(el => res.push(el))
-        i++;
-    }
-    res = res.sort((a, b) => {
-        return a[1].localeCompare(b[1]);
-    });
+//                     items[item[1]] = [
+//                         [type[0], item[0], item[1]]
+//                     ];
+//                 }
+//             });
+//         }
+//     });
+//     let res = [];
+//     types = types.sort();
+//     let amounts = Object.keys(items).sort((a, b) => b - a);
+//     let i = 0;
+//     while (res.length < count) {
+//         items[amounts[i]].forEach(el => res.push(el))
+//         i++;
+//     }
+//     res = res.sort((a, b) => {
+//         return a[1].localeCompare(b[1]);
+//     });
 
-    res = res.sort((a, b) => {
-        return a[0].localeCompare(b[0]);
-    });
-    return res;
+//     res = res.sort((a, b) => {
+//         return a[0].localeCompare(b[0]);
+//     });
+//     return res;
 
-}
+// }
 
 getNTopItemsOfType(5, ["chip", "bar", "soup"]); // =>
 // [
@@ -190,9 +190,9 @@ getNTopItemsOfType(5, ["chip", "bar", "soup"]); // =>
 //     }
 
 //     // return new array based on top count. sort result based on first paramater bar< chip. The only part I have a problem is keeping the type order so am just returning alphabetically, appreciate feedback.
-//     // console.log(top(result, count).sort(function (a, b) {
-//     //     return a[0] > b[0]
-//     // }));
+//     console.log(top(result, count).sort(function (a, b) {
+//         return a[0] > b[0]
+//     }));
 //     return top(result, count).sort(function (a, b) {
 //         return a[0] > b[0]
 //     });
