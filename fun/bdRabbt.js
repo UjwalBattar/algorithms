@@ -112,10 +112,41 @@ const FOOD = [
 ];
 
 function getNTopItemsOfType(count, types) {
+    let items = {};
+    FOOD.forEach(type => {
+        if (types.includes(type[0])) {
+            type[1].forEach(item => {
+                if (items[item[1]]) {
+                    items.push([type[0], item[0], item[1]]);
+                } else {
+
+                    items[item[1]] = [
+                        [type[0], item[0], item[1]]
+                    ];
+                }
+            });
+        }
+    });
+    let res = [];
+    types = types.sort();
+    let amounts = Object.keys(items).sort((a, b) => b - a);
+    let i = 0;
+    while (res.length < count) {
+        items[amounts[i]].forEach(el => res.push(el))
+        i++;
+    }
+    res = res.sort((a, b) => {
+        return a[1].localeCompare(b[1]);
+    });
+
+    res = res.sort((a, b) => {
+        return a[0].localeCompare(b[0]);
+    });
+    return res;
 
 }
 
-getNTopItemsOfType(5, ["bar", "chip", "soup"]); // => 
+getNTopItemsOfType(5, ["chip", "bar", "soup"]); // =>
 // [
 //     ["bar", "power", 92],
 //     ["bar", "granola", 52],
