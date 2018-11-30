@@ -64,45 +64,6 @@ function getMinimumDifference(a, b) {
   return res;
 }
 
-/*
- * Complete the 'degreeOfArray' function below.
- *
- * The function is expected to return an INTEGER.
- * The function accepts INTEGER_ARRAY arr as parameter.
- */
-
-function degreeOfArray(arr) {
-  // Write your code here
-  if (!arr.length) return 0;
-  let vals = {};
-  let deg = 0;
-
-  for (let i = 0; i < arr.length; i++) {
-    let el = arr[i];
-    if (vals[el]) {
-      vals[el][0]++;
-      if (vals[el][0] > deg) {
-        deg = vals[el][0];
-      }
-    } else {
-      vals[el] = [1, arr.lastIndexOf(el) - i + 1];
-    }
-  }
-
-  let minLen = arr.length + 1;
-
-  Object.keys(vals).forEach(el => {
-    if (vals[el][0] === deg) {
-      if (vals[el][1] < minLen) {
-        minLen = vals[el][1];
-      }
-    }
-  });
-  return minLen;
-}
-
-degreeOfArray([1, 2, 1, 3, 2]);
-
 const https = require("https");
 /*
  * Complete the function below.
@@ -172,3 +133,42 @@ function getTotalPages(url, callback) {
 }
 
 getMovieTitles("spiderman");
+
+/*
+ * Complete the 'degreeOfArray' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts INTEGER_ARRAY arr as parameter.
+ */
+
+function degreeOfArray(arr) {
+  // Write your code here
+  if (!arr.length) return 0;
+  let vals = {};
+  let deg = 0;
+
+  for (let i = 0; i < arr.length; i++) {
+    let el = arr[i];
+    if (vals[el]) {
+      vals[el][0]++;
+      if (vals[el][0] > deg) {
+        deg = vals[el][0];
+      }
+    } else {
+      vals[el] = [1, arr.lastIndexOf(el) - i + 1];
+    }
+  }
+
+  let minLen = arr.length + 1;
+
+  Object.keys(vals).forEach(el => {
+    if (vals[el][0] === deg) {
+      if (vals[el][1] < minLen) {
+        minLen = vals[el][1];
+      }
+    }
+  });
+  return minLen > arr.length ? 1 : minLen;
+}
+
+degreeOfArray([1, 2, 1, 3, 2]);
