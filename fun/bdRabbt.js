@@ -122,7 +122,7 @@ function getNTopItemsOfType(count, types) {
 			}
 		}
 	});
-	console.log(final);
+	// console.log(final);
 	return final;
 }
 
